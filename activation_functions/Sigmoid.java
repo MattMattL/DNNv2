@@ -1,6 +1,6 @@
 package deepnnet2.activation_functions;
 
-public class Sigmoid extends ActivationFunctionBase
+public class Sigmoid extends ActivationBase
 {
 	@Override
 	public double f(double x)

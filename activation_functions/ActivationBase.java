@@ -1,8 +1,8 @@
 package deepnnet2.activation_functions;
 
-public abstract class ActivationFunctionBase
+public abstract class ActivationBase
 {
-	public ActivationFunctionBase()
+	public ActivationBase()
 	{
 
 	}

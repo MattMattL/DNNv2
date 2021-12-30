@@ -1,6 +1,6 @@
 package deepnnet2.activation_functions;
 
-public class ReLU extends ActivationFunctionBase
+public class ReLU extends ActivationBase
 {
 	@Override
 	public double f(double x)

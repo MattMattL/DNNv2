@@ -1,6 +1,6 @@
 package deepnnet2.activation_functions;
 
-public class Output extends ActivationFunctionBase
+public class Output extends ActivationBase
 {
 	@Override
 	public double f(double x)

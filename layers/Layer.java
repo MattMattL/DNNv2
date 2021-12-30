@@ -1,25 +1,57 @@
 package deepnnet2.layers;
 
-import deepnnet2.activation_functions.ActivationFunctionBase;
-import deepnnet2.activation_functions.ActivationFunctions;
+import deepnnet2.activation_functions.ActivationBase;
+import deepnnet2.activation_functions.Activations;
 
 public class Layer
 {
-	public final int WIDTH;
+	public int WIDTH = 0;
 	public int NEXT_WIDTH = 0;
-	public final ActivationFunctionBase ACTIVATION_FUNCTION;
+	public ActivationBase ACTIVATION_FUNCTION = null;
 
 	private double[][] weights;
 	private double[] outputVector;
 
-	public Layer(int width, ActivationFunctionBase activationFunction)
+	@Deprecated
+	public Layer(int width, ActivationBase activationFunction)
 	{
 		this.WIDTH = width;
 		this.ACTIVATION_FUNCTION = activationFunction;
 	}
 
-	public void setNextWidth(int nextWidth)
+	public Layer()
 	{
+
+	}
+
+	public static Layer newLayer()
+	{
+		return new Layer();
+	}
+
+	public int getWidth()
+	{
+		return this.WIDTH;
+	}
+
+	public int getNextWidth()
+	{
+		return this.NEXT_WIDTH;
+	}
+
+	public Layer setWidth(int width)
+	{
+		if(this.WIDTH < 1)
+			this.WIDTH = width;
+
+		return this;
+	}
+
+	public Layer setNextWidth(int nextWidth)
+	{
+		if(this.NEXT_WIDTH > 0)
+			return this;
+
 		this.NEXT_WIDTH = nextWidth;
 
 		this.weights = new double[this.WIDTH][this.NEXT_WIDTH];
@@ -28,11 +60,21 @@ public class Layer
 		for(int i=0; i<WIDTH; i++)
 			for(int j=0; j<NEXT_WIDTH; j++)
 				this.weights[i][j] = 0;
+
+		return this;
+	}
+
+	public Layer setActivation(ActivationBase function)
+	{
+		if(this.ACTIVATION_FUNCTION == null)
+			this.ACTIVATION_FUNCTION = function;
+
+		return this;
 	}
 
 	public double[] runLayerFeedForward(double[] inputVector)
 	{
-		if(this.ACTIVATION_FUNCTION != ActivationFunctions.OUTPUT)
+		if(this.ACTIVATION_FUNCTION != Activations.OUTPUT)
 		{
 			for(int j=0; j<NEXT_WIDTH; j++)
 			{

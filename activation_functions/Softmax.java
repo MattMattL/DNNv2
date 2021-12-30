@@ -1,6 +1,6 @@
 package deepnnet2.activation_functions;
 
-public class Softmax extends ActivationFunctionBase
+public class Softmax extends ActivationBase
 {
 	@Override
 	public double f(double x)
