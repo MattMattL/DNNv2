@@ -7,7 +7,7 @@ A modulable deep neural networks and pre-processing layers. This is written in J
 
 ## Current Progress
 
-- TensorFlow-style layer initialisations
+- TensorFlow-style layer initialisations:
 ``` Java
 NeuralNet nnet = new NeuralNet();
 
