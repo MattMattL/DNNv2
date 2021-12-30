@@ -1,7 +1,7 @@
 # DeepNNet v2
 
 ## About DNNv2
-Modulable deep neural networks and pre-processing layers. This is written in Java for possible future use for [OpenSteve].
+Modulable deep neural networks and pre-processing layers. DNNv2 is written in Java for possible future extensions of [OpenSteve].
 
 [OpenSteve]: https://github.com/MattMattL/OpenSteve
 
