@@ -1,7 +1,7 @@
 package deepnnet2;
 
-import deepnnet2.activation_functions.ActivationBase;
-import deepnnet2.activation_functions.Activations;
+import deepnnet2.activations.ActivationBase;
+import deepnnet2.activations.Activations;
 import deepnnet2.layers.Layer;
 
 import java.util.ArrayList;

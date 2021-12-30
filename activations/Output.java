@@ -1,4 +1,4 @@
-package deepnnet2.activation_functions;
+package deepnnet2.activations;
 
 public class Output extends ActivationBase
 {

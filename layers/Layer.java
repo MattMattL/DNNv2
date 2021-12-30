@@ -1,7 +1,7 @@
 package deepnnet2.layers;
 
-import deepnnet2.activation_functions.ActivationBase;
-import deepnnet2.activation_functions.Activations;
+import deepnnet2.activations.ActivationBase;
+import deepnnet2.activations.Activations;
 
 public class Layer
 {
