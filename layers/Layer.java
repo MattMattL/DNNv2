@@ -29,6 +29,11 @@ public class Layer
 		return new Layer();
 	}
 
+	public static Layer newLayer(int width, ActivationBase activation)
+	{
+		return new Layer().setWidth(width).setActivation(activation);
+	}
+
 	public int getWidth()
 	{
 		return this.WIDTH;
