@@ -38,9 +38,7 @@ public class NeuralNet
 		delta = this.layers.get(this.layers.size() - 1).runPerformanceBackprop(desiredOutput);
 
 		for(int i=this.layers.size()-2; i>=0; i--)
-		{
 			delta = this.layers.get(i).runLayerBackprop(delta);
-		}
 	}
 
 	public int size()

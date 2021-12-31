@@ -55,8 +55,8 @@ public class Layer
 
 		this.NEXT_WIDTH = nextWidth;
 
-		this.weights = new double[this.WIDTH][this.NEXT_WIDTH];
-		this.outputVector = new double[this.NEXT_WIDTH];
+		this.weights = new double[WIDTH][NEXT_WIDTH];
+		this.outputVector = new double[NEXT_WIDTH];
 
 		Random random = new Random(1010);
 
@@ -86,16 +86,14 @@ public class Layer
 				double weightedSum = 0;
 
 				for(int i=0; i<WIDTH; i++)
-				{
 					weightedSum += this.weights[i][j] * inputVector[i];
-				}
 
 				this.outputVector[j] = this.ACTIVATION.f(weightedSum);
 			}
 		}
 		else
 		{
-			this.outputVector = inputVector;
+			System.arraycopy(inputVector, 0, this.outputVector, 0, this.WIDTH);
 		}
 
 		double[] outputCopy = new double[NEXT_WIDTH];
