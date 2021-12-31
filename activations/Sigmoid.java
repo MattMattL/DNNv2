@@ -13,4 +13,10 @@ public class Sigmoid extends ActivationBase
 	{
 		return x * (1 - x);
 	}
+
+	@Override
+	public double performance(double desired, double x)
+	{
+		return 0;
+	}
 }

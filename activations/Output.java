@@ -13,4 +13,10 @@ public class Output extends ActivationBase
 	{
 		return 0;
 	}
+
+	@Override
+	public double performance(double desired, double x)
+	{
+		return (x - desired);
+	}
 }

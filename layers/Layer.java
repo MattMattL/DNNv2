@@ -3,21 +3,17 @@ package deepnnet2.layers;
 import deepnnet2.activations.ActivationBase;
 import deepnnet2.activations.Activations;
 
+import java.util.Random;
+
 public class Layer
 {
-	public int WIDTH = 0;
-	public int NEXT_WIDTH = 0;
-	public ActivationBase ACTIVATION_FUNCTION = null;
+	private int WIDTH = 0;
+	private int NEXT_WIDTH = 0;
+	public ActivationBase ACTIVATION = null;
 
 	private double[][] weights;
+	private double[] inputVector;
 	private double[] outputVector;
-
-	@Deprecated
-	public Layer(int width, ActivationBase activationFunction)
-	{
-		this.WIDTH = width;
-		this.ACTIVATION_FUNCTION = activationFunction;
-	}
 
 	public Layer()
 	{
@@ -62,24 +58,28 @@ public class Layer
 		this.weights = new double[this.WIDTH][this.NEXT_WIDTH];
 		this.outputVector = new double[this.NEXT_WIDTH];
 
-		for(int i=0; i<WIDTH; i++)
+		Random random = new Random(1010);
+
+		for(int i = 0; i<WIDTH; i++)
 			for(int j=0; j<NEXT_WIDTH; j++)
-				this.weights[i][j] = 0;
+				this.weights[i][j] = random.nextDouble() * 2 - 1;
 
 		return this;
 	}
 
 	public Layer setActivation(ActivationBase function)
 	{
-		if(this.ACTIVATION_FUNCTION == null)
-			this.ACTIVATION_FUNCTION = function;
+		if(this.ACTIVATION == null)
+			this.ACTIVATION = function;
 
 		return this;
 	}
 
 	public double[] runLayerFeedForward(double[] inputVector)
 	{
-		if(this.ACTIVATION_FUNCTION != Activations.OUTPUT)
+		this.inputVector = inputVector;
+
+		if(this.ACTIVATION != Activations.OUTPUT)
 		{
 			for(int j=0; j<NEXT_WIDTH; j++)
 			{
@@ -90,19 +90,50 @@ public class Layer
 					weightedSum += this.weights[i][j] * inputVector[i];
 				}
 
-				this.outputVector[j] = this.ACTIVATION_FUNCTION.f(weightedSum);
+				this.outputVector[j] = this.ACTIVATION.f(weightedSum);
 			}
 		}
 		else
 		{
-			System.arraycopy(inputVector, 0, this.outputVector, 0, NEXT_WIDTH);
+			this.outputVector = inputVector;
 		}
 
-		return outputVector;
+		double[] outputCopy = new double[NEXT_WIDTH];
+		System.arraycopy(this.outputVector, 0, outputCopy, 0, NEXT_WIDTH);
+
+		return outputCopy;
 	}
 
-	public double[] runLayerBackpropagation(double[] delta)
+	public double[] runPerformanceBackprop(double[] desiredOutput)
 	{
-		return null;
+		double[] delta = new double[NEXT_WIDTH];
+
+		for(int i=0; i<WIDTH; i++)
+			delta[i] = this.ACTIVATION.performance(desiredOutput[i], this.outputVector[i]);
+
+		return delta;
+	}
+
+	public double[] runLayerBackprop(double[] delta)
+	{
+		double[] nextDelta = new double[WIDTH];
+
+		for(int i=0; i<WIDTH; i++)
+		{
+			for(int j=0; j<NEXT_WIDTH; j++)
+			{
+				nextDelta[i] += delta[j] * this.weights[i][j] * this.ACTIVATION.dfdx(this.outputVector[j]);
+			}
+		}
+
+		for(int i=0; i<WIDTH; i++)
+		{
+			for(int j=0; j<NEXT_WIDTH; j++)
+			{
+				this.weights[i][j] -= delta[j] * this.inputVector[i];
+			}
+		}
+
+		return nextDelta;
 	}
 }

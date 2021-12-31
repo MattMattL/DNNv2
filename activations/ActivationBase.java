@@ -9,4 +9,5 @@ public abstract class ActivationBase
 
 	public abstract double f(double x);
 	public abstract double dfdx(double x);
+	public abstract double performance(double desired, double x);
 }

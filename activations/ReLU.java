@@ -18,4 +18,10 @@ public class ReLU extends ActivationBase
 		else
 			return 0.5;
 	}
+
+	@Override
+	public double performance(double desired, double x)
+	{
+		return 0;
+	}
 }
