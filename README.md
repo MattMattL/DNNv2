@@ -7,7 +7,7 @@ Modulable deep neural networks and pre-processing layers. DNNv2 is written in Ja
 
 ## Current Progress
 
-- TensorFlow-style layer initialisation:
+- TensorFlow-style layer initialisations:
 ``` Java
 NeuralNet nnet = new NeuralNet();
 
