@@ -17,3 +17,6 @@ nnet.addLayers(
         Layer.newLayer(4, Activations.OUTPUT)
 );
 ```
+- Backpropagation algorithm with O(depth), O(width^2)
+
+-
